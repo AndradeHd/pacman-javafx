@@ -23,19 +23,19 @@ public class ArcadePacMan_PacAnimationManager extends SpriteAnimationManager<Spr
     protected SpriteAnimation createAnimation(Object id) {
         return switch (id) {
             case CommonAnimationID.ANIM_PAC_FULL -> SpriteAnimation.builder()
-                .ofSprite(spriteSheet.sprite(SpriteID.PACMAN_FULL)).once();
+                .ofSprite(spriteSheet().sprite(SpriteID.PACMAN_FULL)).once();
 
             case CommonAnimationID.ANIM_PAC_MUNCHING -> SpriteAnimation.builder()
                 .fromSprites(pacMunchingSprites(Direction.LEFT))
                 .endless();
 
             case CommonAnimationID.ANIM_PAC_DYING -> SpriteAnimation.builder()
-                .fromSprites(spriteSheet.spriteSequence(SpriteID.PACMAN_DYING))
+                .fromSprites(spriteSheet().spriteSequence(SpriteID.PACMAN_DYING))
                 .ticksPerFrame(8)
                 .once();
 
             case ArcadePacMan_UIConfig.AnimationID.ANIM_BIG_PAC_MAN -> SpriteAnimation.builder()
-                .fromSprites(spriteSheet.spriteSequence(SpriteID.PACMAN_BIG))
+                .fromSprites(spriteSheet().spriteSequence(SpriteID.PACMAN_BIG))
                 .ticksPerFrame(3)
                 .endless();
 
@@ -61,6 +61,6 @@ public class ArcadePacMan_PacAnimationManager extends SpriteAnimationManager<Spr
             case LEFT  -> spriteSheet().spriteSequence(SpriteID.PACMAN_MUNCHING_LEFT);
             case UP    -> spriteSheet().spriteSequence(SpriteID.PACMAN_MUNCHING_UP);
             case DOWN  -> spriteSheet().spriteSequence(SpriteID.PACMAN_MUNCHING_DOWN);
-        };
+        }
     }
 }
