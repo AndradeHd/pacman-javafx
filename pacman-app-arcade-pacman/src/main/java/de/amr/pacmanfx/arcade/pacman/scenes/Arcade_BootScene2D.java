@@ -1,0 +1,56 @@
+/*
+Copyright (c) 2021-2026 Armin Reichert (MIT License)
+See file LICENSE in repository root directory for details.
+*/
+package de.amr.pacmanfx.arcade.pacman.scenes;
+
+import de.amr.pacmanfx.arcade.pacman.rendering.Arcade_BootScene2D_Renderer;
+import de.amr.pacmanfx.ui._2d.GameScene2D;
+import de.amr.pacmanfx.ui.api.GameUI;
+import de.amr.pacmanfx.uilib.assets.SpriteSheet;
+import de.amr.pacmanfx.uilib.rendering.HUD_Renderer;
+import javafx.scene.canvas.Canvas;
+
+/**
+ * The boot screen is showing some strange screen patterns and eventually  a grid.
+ * This scene tries to mimic that to a certain degree.
+ */
+public class Arcade_BootScene2D extends GameScene2D {
+
+    private Arcade_BootScene2D_Renderer sceneRenderer;
+
+    public Arcade_BootScene2D(GameUI ui) {
+        super(ui);
+    }
+
+    @Override
+    protected HUD_Renderer hudRenderer() {
+        return null;
+    }
+
+    @Override
+    public Arcade_BootScene2D_Renderer sceneRenderer() {
+        return sceneRenderer;
+    }
+
+    @Override
+    public void doInit() {
+        context().currentGame().hud().all(false);
+   }
+
+    @Override
+    protected void createRenderers(Canvas canvas) {
+        final SpriteSheet<?> spriteSheet = ui.currentConfig().spriteSheet();
+        sceneRenderer = configureRenderer(new Arcade_BootScene2D_Renderer(this, canvas, spriteSheet));
+    }
+
+    @Override
+    protected void doEnd() {}
+
+    @Override
+    public void update() {
+        if (context().currentGameState().timer().atSecond(4)) {
+            context().currentGame().stateMachine().letCurrentStateExpire();
+        }
+    }
+}
